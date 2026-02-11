@@ -41,11 +41,31 @@ npm run preview
 
 ## 部署
 
-本项目使用 GitHub Actions 自动部署到 GitHub Pages。
+### 首次部署设置
 
-1. 推送到 `main` 分支
-2. GitHub Actions 会自动构建并部署
-3. 访问 `https://debaosite.dpdns.org` 或 `https://de-bao.github.io/site`
+1. **添加 GitHub Actions Workflow**：
+   - 由于 token 权限限制，需要手动在 GitHub 网页上添加 workflow 文件
+   - 访问 https://github.com/de-bao/site
+   - 点击 "Add file" -> "Create new file"
+   - 文件路径：`.github/workflows/deploy.yml`
+   - 内容参考项目根目录的 `.github/workflows/deploy.yml` 文件
+   - 或者直接通过 GitHub 网页界面创建该文件
+
+2. **启用 GitHub Pages**：
+   - 访问 https://github.com/de-bao/site/settings/pages
+   - 在 "Source" 下选择 "GitHub Actions"
+   - 保存设置
+
+3. **自动部署**：
+   - 推送到 `main` 分支后，GitHub Actions 会自动构建并部署
+   - 访问 `https://debaosite.dpdns.org` 或 `https://de-bao.github.io/site`
+
+### 手动部署（如果需要）
+
+```bash
+npm run build
+# 然后将 dist/ 目录的内容推送到 gh-pages 分支
+```
 
 ## 项目结构
 
