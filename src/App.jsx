@@ -5,6 +5,7 @@ import Publications from './components/Publications'
 import Projects from './components/Projects'
 import Podcast from './components/Podcast'
 import ReviewerService from './components/ReviewerService'
+import ClustrMap from './components/ClustrMap'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Projects />
         <Podcast />
         <ReviewerService />
+        <ClustrMap />
       </div>
     </div>
   )
