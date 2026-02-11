@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply font-sans text-base font-normal text-gray-900;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  
-  a {
-    @apply text-primary no-underline;
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
   }
-  
-  a:hover,
-  a:focus {
-    @apply text-secondary;
+
+  #root {
+    height: 100vh;
+    overflow: hidden;
   }
 }

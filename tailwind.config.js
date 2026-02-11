@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1772d0',
-        secondary: '#f09228',
+        primary: '#0066ff',
+        secondary: '#0052cc',
       },
       fontFamily: {
-        sans: ['Titillium Web', 'Verdana', 'Helvetica', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'sans-serif'],
       },
     },
   },
