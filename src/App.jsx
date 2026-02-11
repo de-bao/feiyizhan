@@ -5,7 +5,6 @@ function App() {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isChatMode, setIsChatMode] = useState(false)
-  const messagesEndRef = useRef(null)
   const mainContainerRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -18,19 +17,17 @@ function App() {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [messages, isLoading])
 
   const handleSend = async () => {
     if (!inputValue.trim() || isLoading) return
 
     const content = inputValue.trim()
 
-    // 切换到聊天模式
     if (!isChatMode) {
       setIsChatMode(true)
     }
 
-    // 添加用户消息
     const userMessage = {
       id: Date.now(),
       role: 'user',
@@ -41,7 +38,6 @@ function App() {
     setInputValue('')
     setIsLoading(true)
 
-    // 模拟AI回复（实际项目中应该调用API）
     setTimeout(() => {
       const assistantMessage = {
         id: Date.now() + 1,
@@ -69,21 +65,58 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      {/* 顶部导航栏 */}
-      <header className="bg-white border-b border-gray-200 px-6 py-3 shadow-sm">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-gradient-to-br from-blue-600 to-blue-700 rounded-md flex items-center justify-center">
-              <span className="text-white text-sm font-bold">元</span>
+    <div className="flex flex-col h-screen" style={{ backgroundColor: '#f5f5f5' }}>
+      {/* 顶部导航栏 - 完全模仿元宝样式 */}
+      <header className="bg-white border-b" style={{ borderColor: '#e5e7eb', padding: '12px 24px' }}>
+        <div className="flex items-center justify-between" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <div style={{ 
+                width: '28px', 
+                height: '28px', 
+                background: 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '14px'
+              }}>
+                元
+              </div>
+              <span style={{ fontSize: '18px', fontWeight: 600, color: '#1f2937' }}>元宝</span>
             </div>
-            <h1 className="text-lg font-semibold text-gray-900">元宝</h1>
           </div>
           <div className="flex items-center gap-4">
-            <button className="text-gray-500 hover:text-gray-700 text-sm px-3 py-1.5 rounded-md hover:bg-gray-100 transition-colors">
+            <button style={{
+              background: 'none',
+              border: 'none',
+              color: '#6b7280',
+              fontSize: '14px',
+              cursor: 'pointer',
+              padding: '6px 12px',
+              borderRadius: '6px',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => { e.target.style.background = '#f3f4f6'; e.target.style.color = '#374151' }}
+            onMouseLeave={(e) => { e.target.style.background = 'none'; e.target.style.color = '#6b7280' }}
+            >
               搜索
             </button>
-            <button className="text-gray-500 hover:text-gray-700 text-sm px-3 py-1.5 rounded-md hover:bg-gray-100 transition-colors">
+            <button style={{
+              background: 'none',
+              border: 'none',
+              color: '#6b7280',
+              fontSize: '14px',
+              cursor: 'pointer',
+              padding: '6px 12px',
+              borderRadius: '6px',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => { e.target.style.background = '#f3f4f6'; e.target.style.color = '#374151' }}
+            onMouseLeave={(e) => { e.target.style.background = 'none'; e.target.style.color = '#6b7280' }}
+            >
               前往下载中心
             </button>
           </div>
@@ -91,20 +124,40 @@ function App() {
       </header>
 
       {/* 主内容区域 */}
-      <div className="flex-1 overflow-y-auto px-6 py-6" ref={mainContainerRef}>
-        <div className="max-w-3xl mx-auto flex flex-col gap-8">
+      <div className="flex-1 overflow-y-auto" ref={mainContainerRef} style={{ padding: '24px' }}>
+        <div className="flex flex-col gap-8" style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
           {/* 欢迎卡片 - 只在非聊天模式显示 */}
           {!isChatMode && (
             <>
               {/* 欢迎消息卡片1 */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div style={{
+                background: 'white',
+                borderRadius: '12px',
+                padding: '24px',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-base">元</span>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    background: 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    flexShrink: 0
+                  }}>
+                    元
                   </div>
-                  <div className="flex-1">
-                    <div className="text-base font-semibold text-gray-900 mb-2">Hi~ 我是元宝</div>
-                    <div className="text-sm text-gray-600 leading-relaxed">
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '16px', fontWeight: 600, color: '#1f2937', marginBottom: '8px' }}>
+                      Hi~ 我是元宝
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#6b7280', lineHeight: '1.6' }}>
                       你身边的智能助手，可以为你答疑解惑、精读文档、尽情创作，让元宝助你轻松工作，多点生活
                     </div>
                   </div>
@@ -112,14 +165,34 @@ function App() {
               </div>
 
               {/* 欢迎消息卡片2 */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div style={{
+                background: 'white',
+                borderRadius: '12px',
+                padding: '24px',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-base">元</span>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    background: 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    flexShrink: 0
+                  }}>
+                    元
                   </div>
-                  <div className="flex-1">
-                    <div className="text-base font-semibold text-gray-900 mb-2">Hi~ 我是元宝</div>
-                    <div className="text-sm text-gray-600 leading-relaxed">
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '16px', fontWeight: 600, color: '#1f2937', marginBottom: '8px' }}>
+                      Hi~ 我是元宝
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#6b7280', lineHeight: '1.6' }}>
                       你身边的智能助手，可以为你答疑解惑、尽情创作，快来点击以下任一功能体验吧～
                     </div>
                   </div>
@@ -127,33 +200,51 @@ function App() {
               </div>
 
               {/* 功能提示卡片 */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                <div className="text-base font-semibold text-gray-900 mb-4">你可以这样问</div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <button
-                    onClick={() => handleExampleQuestion('帮我写一份工作总结')}
-                    className="bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-blue-500 rounded-lg px-4 py-3 text-sm text-gray-700 hover:text-blue-600 transition-all text-left"
-                  >
-                    帮我写一份工作总结
-                  </button>
-                  <button
-                    onClick={() => handleExampleQuestion('解释一下量子计算的基本原理')}
-                    className="bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-blue-500 rounded-lg px-4 py-3 text-sm text-gray-700 hover:text-blue-600 transition-all text-left"
-                  >
-                    解释一下量子计算的基本原理
-                  </button>
-                  <button
-                    onClick={() => handleExampleQuestion('帮我分析一下这个文档的主要内容')}
-                    className="bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-blue-500 rounded-lg px-4 py-3 text-sm text-gray-700 hover:text-blue-600 transition-all text-left"
-                  >
-                    帮我分析一下这个文档的主要内容
-                  </button>
-                  <button
-                    onClick={() => handleExampleQuestion('写一首关于春天的诗')}
-                    className="bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-blue-500 rounded-lg px-4 py-3 text-sm text-gray-700 hover:text-blue-600 transition-all text-left"
-                  >
-                    写一首关于春天的诗
-                  </button>
+              <div style={{
+                background: 'white',
+                borderRadius: '12px',
+                padding: '24px',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <div style={{ fontSize: '16px', fontWeight: 600, color: '#1f2937', marginBottom: '16px' }}>
+                  你可以这样问
+                </div>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: '12px'
+                }}>
+                  {['帮我写一份工作总结', '解释一下量子计算的基本原理', '帮我分析一下这个文档的主要内容', '写一首关于春天的诗'].map((text, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleExampleQuestion(text)}
+                      style={{
+                        background: '#f9fafb',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '8px',
+                        padding: '12px 16px',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        fontSize: '14px',
+                        color: '#374151',
+                        textAlign: 'left',
+                        width: '100%'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = '#f3f4f6'
+                        e.target.style.borderColor = '#0066ff'
+                        e.target.style.color = '#0066ff'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = '#f9fafb'
+                        e.target.style.borderColor = '#e5e7eb'
+                        e.target.style.color = '#374151'
+                      }}
+                    >
+                      {text}
+                    </button>
+                  ))}
                 </div>
               </div>
             </>
@@ -166,23 +257,37 @@ function App() {
                 <div
                   key={message.id}
                   className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+                  style={{ alignItems: 'flex-start' }}
                 >
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-medium text-white ${
-                      message.role === 'user'
-                        ? 'bg-blue-600'
-                        : 'bg-gradient-to-br from-blue-600 to-blue-700'
-                    }`}
-                  >
+                  <div style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    background: message.role === 'user' 
+                      ? '#0066ff' 
+                      : 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)'
+                  }}>
                     {message.role === 'user' ? '我' : '元'}
                   </div>
-                  <div
-                    className={`max-w-[70%] rounded-xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
-                      message.role === 'user'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-gray-900 border border-gray-200'
-                    }`}
-                  >
+                  <div style={{
+                    maxWidth: '70%',
+                    borderRadius: '12px',
+                    padding: '12px 16px',
+                    fontSize: '14px',
+                    lineHeight: '1.6',
+                    wordWrap: 'break-word',
+                    whiteSpace: 'pre-wrap',
+                    background: message.role === 'user' ? '#0066ff' : 'white',
+                    color: message.role === 'user' ? 'white' : '#1f2937',
+                    border: message.role === 'user' ? 'none' : '1px solid #e5e7eb'
+                  }}>
                     {message.content}
                   </div>
                 </div>
@@ -190,14 +295,55 @@ function App() {
 
               {/* 加载动画 */}
               {isLoading && (
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center flex-shrink-0 text-xs font-medium text-white">
+                <div className="flex gap-3" style={{ alignItems: 'flex-start' }}>
+                  <div style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #0066ff 0%, #0052cc 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    flexShrink: 0
+                  }}>
                     元
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex gap-1.5">
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  <div style={{
+                    background: 'white',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '12px',
+                    padding: '12px 16px',
+                    display: 'flex',
+                    gap: '4px',
+                    alignItems: 'center'
+                  }}>
+                    <div style={{
+                      width: '6px',
+                      height: '6px',
+                      background: '#9ca3af',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s infinite ease-in-out',
+                      animationDelay: '0ms'
+                    }}></div>
+                    <div style={{
+                      width: '6px',
+                      height: '6px',
+                      background: '#9ca3af',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s infinite ease-in-out',
+                      animationDelay: '150ms'
+                    }}></div>
+                    <div style={{
+                      width: '6px',
+                      height: '6px',
+                      background: '#9ca3af',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s infinite ease-in-out',
+                      animationDelay: '300ms'
+                    }}></div>
                   </div>
                 </div>
               )}
@@ -206,10 +352,18 @@ function App() {
         </div>
       </div>
 
-      {/* 输入区域 */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex gap-3 items-end bg-gray-50 border border-gray-200 rounded-xl p-3">
+      {/* 输入区域 - 完全模仿元宝样式 */}
+      <div className="bg-white border-t" style={{ borderColor: '#e5e7eb', padding: '16px 24px', position: 'sticky', bottom: 0 }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'flex-end',
+            background: '#f9fafb',
+            border: '1px solid #e5e7eb',
+            borderRadius: '12px',
+            padding: '12px'
+          }}>
             <textarea
               value={inputValue}
               onChange={(e) => {
@@ -220,26 +374,66 @@ function App() {
               onKeyDown={handleKeyPress}
               placeholder="输入消息..."
               rows={1}
-              className="flex-1 bg-transparent border-none outline-none resize-none text-sm text-gray-900 placeholder-gray-400 max-h-[120px] overflow-y-auto"
-              style={{ minHeight: '24px' }}
+              style={{
+                flex: 1,
+                border: 'none',
+                background: 'transparent',
+                fontSize: '14px',
+                fontFamily: 'inherit',
+                resize: 'none',
+                minHeight: '24px',
+                maxHeight: '120px',
+                overflowY: 'auto',
+                outline: 'none',
+                color: '#1f2937'
+              }}
             />
             <button
               onClick={handleSend}
               disabled={!inputValue.trim() || isLoading}
-              className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                inputValue.trim() && !isLoading
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-gray-300 text-gray-400 cursor-not-allowed'
-              }`}
+              style={{
+                width: '32px',
+                height: '32px',
+                border: 'none',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: inputValue.trim() && !isLoading ? 'pointer' : 'not-allowed',
+                transition: 'background-color 0.2s',
+                flexShrink: 0,
+                background: inputValue.trim() && !isLoading ? '#0066ff' : '#d1d5db',
+                color: 'white'
+              }}
+              onMouseEnter={(e) => {
+                if (inputValue.trim() && !isLoading) {
+                  e.target.style.background = '#0052cc'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (inputValue.trim() && !isLoading) {
+                  e.target.style.background = '#0066ff'
+                }
+              }}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             </button>
           </div>
-          <p className="text-xs text-gray-400 text-center mt-2">内容由AI生成，仅供参考</p>
+          <p style={{ textAlign: 'center', fontSize: '12px', color: '#9ca3af', marginTop: '8px' }}>
+            内容由AI生成，仅供参考
+          </p>
         </div>
       </div>
+
+      {/* 添加加载动画的CSS */}
+      <style>{`
+        @keyframes bounce {
+          0%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-6px); }
+        }
+      `}</style>
     </div>
   )
 }
