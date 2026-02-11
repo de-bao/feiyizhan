@@ -1,4 +1,4 @@
-# Tairan He - Resume
+# Index - Resume
 
 个人简历页面
 
@@ -8,4 +8,4 @@
 
 ## 本地查看
 
-直接在浏览器中打开 `Tairan He.html` 即可查看。
+直接在浏览器中打开 `index.html` 即可查看。
