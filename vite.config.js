@@ -14,17 +14,6 @@ export default defineConfig({
     {
       name: 'copy-resource-files',
       closeBundle() {
-        // 复制 index_files 文件夹到 dist
-        const indexFilesSrc = resolve(__dirname, 'index_files')
-        const indexFilesDest = resolve(__dirname, 'dist', 'index_files')
-        if (existsSync(indexFilesSrc)) {
-          try {
-            execSync(`cp -r "${indexFilesSrc}" "${indexFilesDest}"`, { stdio: 'inherit' })
-          } catch (e) {
-            console.error('Failed to copy index_files:', e)
-          }
-        }
-        
         // 复制 public/yuanbao_files 文件夹到 dist
         const yuanbaoFilesSrc = resolve(__dirname, 'public', 'yuanbao_files')
         const yuanbaoFilesDest = resolve(__dirname, 'dist', 'yuanbao_files')

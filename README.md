@@ -79,11 +79,11 @@ gh-pages -d dist
 ```
 site/
 ├── src/
-│   ├── components/     # React 组件（如果需要拆分）
 │   ├── App.jsx         # 主应用组件
 │   ├── main.jsx        # 入口文件
 │   └── index.css       # 全局样式
-├── index_files/        # 静态资源（图片、JS等）
+├── public/
+│   └── yuanbao_files/  # 元宝静态资源（图片、CSS、JS等）
 ├── index.html          # HTML 模板
 ├── vite.config.js      # Vite 配置
 ├── tailwind.config.js  # Tailwind 配置
