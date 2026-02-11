@@ -7,6 +7,7 @@ const News = () => {
     { date: '[11/2024]', content: 'Received CMU RI Presidential Fellowship. Thanks, CMU!' },
     { date: '[07/2024]', content: 'ABS is selected as the Outstanding Student Paper Award Finalist at RSS 2024!', link: 'https://roboticsconference.org/2024/program/awards/' },
     { date: '[04/2024]', content: 'Invited talk on Bridging safety, agility and generalization for learning-based robotic control at TechBeat.', link: 'https://www.youtube.com/watch?v=p_Ks7mC1dN4' },
+    { date: '[11/2024]', content: 'Received CMU RI Presidential Fellowship. Thanks, CMU!' },
   ]
 
   return (
