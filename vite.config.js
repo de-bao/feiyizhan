@@ -12,16 +12,27 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      name: 'copy-index-files',
+      name: 'copy-resource-files',
       closeBundle() {
         // 复制 index_files 文件夹到 dist
-        const srcDir = resolve(__dirname, 'index_files')
-        const destDir = resolve(__dirname, 'dist', 'index_files')
-        if (existsSync(srcDir)) {
+        const indexFilesSrc = resolve(__dirname, 'index_files')
+        const indexFilesDest = resolve(__dirname, 'dist', 'index_files')
+        if (existsSync(indexFilesSrc)) {
           try {
-            execSync(`cp -r "${srcDir}" "${destDir}"`, { stdio: 'inherit' })
+            execSync(`cp -r "${indexFilesSrc}" "${indexFilesDest}"`, { stdio: 'inherit' })
           } catch (e) {
             console.error('Failed to copy index_files:', e)
+          }
+        }
+        
+        // 复制 public/yuanbao_files 文件夹到 dist
+        const yuanbaoFilesSrc = resolve(__dirname, 'public', 'yuanbao_files')
+        const yuanbaoFilesDest = resolve(__dirname, 'dist', 'yuanbao_files')
+        if (existsSync(yuanbaoFilesSrc)) {
+          try {
+            execSync(`cp -r "${yuanbaoFilesSrc}" "${yuanbaoFilesDest}"`, { stdio: 'inherit' })
+          } catch (e) {
+            console.error('Failed to copy yuanbao_files:', e)
           }
         }
       }

@@ -174,13 +174,13 @@ function App() {
                                 <div className="input-guide-v2 input-guide-v2--visible">
                                   <div className="input-guide-v2-item InputGuideV2_skillDialogNonePadding__B6eac" data-item-index="0" data-item-report-now-internet-search-status="3" data-item-banner-id="91001953" data-item-cms-id="91001953" data-item-target-model="" data-item-report-internet-search="3" data-hy-exposured="1">
                                     <div className="InputGuideV2_newYearWrap__MYuZw InputGuideV2_newYearWrap__MYuZw">
-                                      <img draggable="false" className="InputGuideV2_fullImg___Wg_P" src="https://cdn-pro.yuanbao.tencent.com/public/pro/NzFkYzk2NzYtNGM4Mi00Y2U4LWI1NzYtZmRmM2FlMmYwNmYx_compress.webp" alt="" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+                                      <img draggable="false" className="InputGuideV2_fullImg___Wg_P" src="/yuanbao_files/NzFkYzk2NzYtNGM4Mi00Y2U4LWI1NzYtZmRmM2FlMmYwNmYx_compress.webp" alt="" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
                                     </div>
                                     <span className="input-guide-v2-item__subtitle"></span>
                                   </div>
                                   <div className="input-guide-v2-item" data-item-title="下载元宝电脑版" data-item-sub-title="快速启动，划词问答，多格式全能处理" data-item-index="1" data-item-report-now-internet-search-status="3" data-item-banner-id="91001955" data-item-cms-id="91001955" data-item-target-model="" data-item-report-internet-search="3" data-hy-exposured="1" onClick={() => handleExampleQuestion('下载元宝电脑版')}>
                                     <div className="input-guide-v2-item__title-wrap">
-                                      <img className="input-guide-v2-item__title-logo" src="https://cdn-pro.yuanbao.tencent.com/public/pro/NjZlZDhiNDQtM2Q2Ni00MmViLTgzZDQtM2RjM2RjZjFlZmVh.png" alt="下载元宝电脑版" style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+                                      <img className="input-guide-v2-item__title-logo" src="/yuanbao_files/NjZlZDhiNDQtM2Q2Ni00MmViLTgzZDQtM2RjM2RjZjFlZmVh.png" alt="下载元宝电脑版" style={{ width: '16px', height: '16px', marginRight: '4px' }} />
                                       <span>下载元宝电脑版</span>
                                       <div className="ybc-icon input-guide-v2-item__title-arrow">
                                         <svg className="ybc-icon-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
