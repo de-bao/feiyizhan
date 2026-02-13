@@ -85,9 +85,7 @@ export const SUGGESTION_CARDS = [
 ]
 
 // 导航项配置
-export const NAV_ITEMS = [
-  { id: 'home', label: '首页', icon: '🏠', active: true }
-]
+export const NAV_ITEMS = []
 
 // 文件类型支持
 export const SUPPORTED_FILE_TYPES = [
