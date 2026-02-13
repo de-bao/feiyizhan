@@ -127,9 +127,9 @@ const handleExampleClick = (text) => {
 }
 
 // 新建聊天
-const handleNewChat = (chatId) => {
-  // 如果传入了chatId，说明是从侧边栏触发的，使用该ID
-  const newChatId = chatId || chatIdCounter++
+const handleNewChat = () => {
+  // 创建新聊天会话
+  const newChatId = chatIdCounter++
   const newChat = {
     id: newChatId,
     name: `新对话 ${newChatId}`,

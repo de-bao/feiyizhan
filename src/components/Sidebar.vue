@@ -187,12 +187,7 @@ onUnmounted(() => {
 
 // 新建聊天
 const handleNewChat = () => {
-  const newChat = {
-    id: chatIdCounter++,
-    name: `新对话 ${chatIdCounter - 2}`
-  }
-  chatHistory.value.unshift(newChat)
-  emit('new-chat', newChat.id)
+  emit('new-chat')
 }
 
 // 点击聊天项
