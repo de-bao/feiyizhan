@@ -91,6 +91,7 @@ const handleExampleClick = (text) => {
 .app {
   display: flex;
   height: 100vh;
+  height: 100dvh; /* 动态视口高度，移动端更准确 */
   background-color: #ffffff;
 }
 

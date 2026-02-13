@@ -139,7 +139,8 @@ defineProps({
 /* 移动端响应式 - 只在真正的触摸设备上应用 */
 @media (max-width: 768px) and (pointer: coarse) {
   .chat-area {
-    padding: 20px 12px 180px;
+    padding: 20px 12px 200px;
+    padding-bottom: calc(200px + env(safe-area-inset-bottom, 0px));
   }
 
   .greeting {

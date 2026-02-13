@@ -480,8 +480,14 @@ const handleAttach = (type) => {
 /* 移动端响应式 - 只在真正的触摸设备上应用 */
 @media (max-width: 768px) and (pointer: coarse) {
   .input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 12px 16px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 100;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .input-container {
@@ -565,7 +571,7 @@ const handleAttach = (type) => {
 @media (max-width: 480px) and (pointer: coarse) {
   .input-area {
     padding: 10px 12px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   }
 
   .toolbar {

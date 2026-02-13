@@ -19,9 +19,8 @@
 
   #root {
     height: 100vh;
+    height: 100dvh; /* 动态视口高度，移动端更准确 */
     overflow: hidden;
-    /* 移动端安全区域 */
-    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* 移动端触摸优化 - 只在真正的触摸设备上应用 */
