@@ -4,7 +4,11 @@
     <div v-if="!sidebarCollapsed" class="sidebar-overlay" @click="sidebarCollapsed = true"></div>
 
     <!-- 左侧导航栏 -->
-    <Sidebar :collapsed="sidebarCollapsed" @toggle="sidebarCollapsed = !sidebarCollapsed" />
+    <Sidebar 
+      :collapsed="sidebarCollapsed" 
+      @toggle="sidebarCollapsed = !sidebarCollapsed"
+      @new-chat="handleNewChat"
+    />
 
     <!-- 主内容区域 -->
     <div class="main-content">
@@ -23,15 +27,15 @@
         :on-drag-over="dragHandlers.onDragOver"
         :on-drag-leave="dragHandlers.onDragLeave"
         :on-drop="dragHandlers.onDrop"
-      >
-        <SuggestionCards @card-click="handleExampleClick" />
-      </ChatArea>
+      />
 
       <!-- 拖拽覆盖层 -->
       <DragOverlay :is-visible="isDragging" />
 
       <!-- 输入区域 -->
-      <InputArea v-model="inputValue" @send="handleSend" />
+      <InputArea v-model="inputValue" @send="handleSend">
+        <SuggestionCards v-if="!isChatMode" @card-click="handleExampleClick" />
+      </InputArea>
     </div>
   </div>
 </template>
@@ -89,6 +93,16 @@ const handleExampleClick = (text) => {
   setTimeout(() => {
     handleSend(text)
   }, 100)
+}
+
+// 新建聊天
+const handleNewChat = () => {
+  // 清空消息
+  messages.value = []
+  // 重置聊天模式
+  isChatMode.value = false
+  // 清空输入
+  inputValue.value = ''
 }
 </script>
 

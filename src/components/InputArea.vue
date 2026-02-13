@@ -1,6 +1,11 @@
 <template>
   <div class="input-area">
     <div class="input-container">
+      <!-- 建议卡片（在工具栏上方） -->
+      <div v-if="$slots.default" class="suggestion-cards-wrapper">
+        <slot />
+      </div>
+
       <!-- 工具栏（在搜索框上方） -->
       <div class="toolbar">
         <div
@@ -303,6 +308,10 @@ const handleAttach = (type) => {
   gap: 8px;
 }
 
+.suggestion-cards-wrapper {
+  padding: 0 4px 8px;
+}
+
 .toolbar {
   display: flex;
   gap: 8px;
@@ -492,6 +501,10 @@ const handleAttach = (type) => {
 
   .input-container {
     gap: 6px;
+  }
+
+  .suggestion-cards-wrapper {
+    padding: 0 2px 6px;
   }
 
   .toolbar {
