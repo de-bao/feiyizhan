@@ -13,48 +13,101 @@
           </svg>
           <span>深度思考</span>
         </div>
-        <div
-          class="toolbar-item active"
-          @mouseenter="handleActiveHover"
-          @mouseleave="handleActiveLeave"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M8.0019 13.1391C10.8399 13.1391 13.1405 10.8384 13.1405 8.00044C13.1405 5.16245 10.8399 2.86182 8.0019 2.86182C5.16392 2.86182 2.86328 5.16245 2.86328 8.00044C2.86328 10.8384 5.16392 13.1391 8.0019 13.1391Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            />
-          </svg>
-          <span>自动搜索</span>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path
-              d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+        
+        <!-- 自动搜索下拉 -->
+        <div ref="searchDropdownRef" class="toolbar-dropdown">
+          <div
+            class="toolbar-item active"
+            @click="showSearchDropdown = !showSearchDropdown"
+            @mouseenter="handleActiveHover"
+            @mouseleave="handleActiveLeave"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M8.0019 13.1391C10.8399 13.1391 13.1405 10.8384 13.1405 8.00044C13.1405 5.16245 10.8399 2.86182 8.0019 2.86182C5.16392 2.86182 2.86328 5.16245 2.86328 8.00044C2.86328 10.8384 5.16392 13.1391 8.0019 13.1391Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>{{ searchMode === 'auto' ? '自动搜索' : '手动搜索' }}</span>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path
+                d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div v-if="showSearchDropdown" class="dropdown-menu">
+            <div
+              class="dropdown-item"
+              :class="{ active: searchMode === 'auto' }"
+              @click="selectSearchMode('auto')"
+            >
+              自动
+            </div>
+            <div
+              class="dropdown-item"
+              :class="{ active: searchMode === 'manual' }"
+              @click="selectSearchMode('manual')"
+            >
+              手动
+            </div>
+          </div>
         </div>
-        <div class="toolbar-item" @mouseenter="handleHover" @mouseleave="handleLeave">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M4.49609 8.79297C6.01297 8.79297 7.24299 10.0223 7.24316 11.5391C7.24303 13.0558 6.013 14.2861 4.49609 14.2861C2.97927 14.286 1.75013 13.0558 1.75 11.5391C1.75018 10.0224 2.9793 8.79307 4.49609 8.79297Z"
-              fill="currentColor"
-              fill-opacity="0.9"
-            />
-          </svg>
-          <span>工具</span>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path
-              d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+
+        <!-- 工具下拉 -->
+        <div ref="toolDropdownRef" class="toolbar-dropdown">
+          <div
+            class="toolbar-item"
+            @click="showToolDropdown = !showToolDropdown"
+            @mouseenter="handleHover"
+            @mouseleave="handleLeave"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M4.49609 8.79297C6.01297 8.79297 7.24299 10.0223 7.24316 11.5391C7.24303 13.0558 6.013 14.2861 4.49609 14.2861C2.97927 14.286 1.75013 13.0558 1.75 11.5391C1.75018 10.0224 2.9793 8.79307 4.49609 8.79297Z"
+                fill="currentColor"
+                fill-opacity="0.9"
+              />
+            </svg>
+            <span>{{ toolMode || '工具' }}</span>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path
+                d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div v-if="showToolDropdown" class="dropdown-menu">
+            <div
+              class="dropdown-item"
+              :class="{ active: toolMode === '写作' }"
+              @click="selectToolMode('写作')"
+            >
+              写作
+            </div>
+            <div
+              class="dropdown-item"
+              :class="{ active: toolMode === '编程' }"
+              @click="selectToolMode('编程')"
+            >
+              编程
+            </div>
+            <div
+              class="dropdown-item"
+              :class="{ active: toolMode === '解题' }"
+              @click="selectToolMode('解题')"
+            >
+              解题
+            </div>
+          </div>
         </div>
       </div>
 
@@ -96,6 +149,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useClickOutside } from '../composables/useClickOutside'
 
 const props = defineProps({
   modelValue: {
@@ -108,6 +162,33 @@ const emit = defineEmits(['update:modelValue', 'send'])
 
 const textareaRef = ref(null)
 const inputValue = ref(props.modelValue)
+
+// 下拉菜单状态
+const showSearchDropdown = ref(false)
+const showToolDropdown = ref(false)
+const searchMode = ref('auto') // 'auto' | 'manual'
+const toolMode = ref('') // '写作' | '编程' | '解题'
+
+// 点击外部关闭下拉菜单
+const searchDropdownRef = useClickOutside(() => {
+  showSearchDropdown.value = false
+})
+
+const toolDropdownRef = useClickOutside(() => {
+  showToolDropdown.value = false
+})
+
+// 选择搜索模式
+const selectSearchMode = (mode) => {
+  searchMode.value = mode
+  showSearchDropdown.value = false
+}
+
+// 选择工具模式
+const selectToolMode = (mode) => {
+  toolMode.value = mode
+  showToolDropdown.value = false
+}
 
 const handleKeyDown = (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
@@ -194,6 +275,42 @@ const handleActiveLeave = (e) => {
 
 .toolbar-item.active {
   background: #e5e7eb;
+}
+
+.toolbar-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+}
+
+.dropdown-item.active {
+  background-color: #e0e7ff;
+  color: #0066ff;
+  font-weight: 500;
 }
 
 .input-textarea {
