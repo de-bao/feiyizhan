@@ -136,12 +136,38 @@
 
         <!-- 右侧按钮 -->
         <div class="input-actions">
-          <div class="action-button" @mouseenter="handleHover" @mouseleave="handleLeave">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                d="M10.002 3.06055C10.4161 3.06065 10.752 3.39639 10.752 3.81055V9.25H16.1914C16.6056 9.25 16.9414 9.58579 16.9414 10C16.9414 10.4142 16.6056 10.75 16.1914 10.75H10.752V16.1895C10.752 16.6036 10.4161 16.9394 10.002 16.9395C9.58774 16.9395 9.25195 16.6037 9.25195 16.1895V10.75H3.8125C3.39829 10.75 3.0625 10.4142 3.0625 10C3.0625 9.58579 3.39829 9.25 3.8125 9.25H9.25195V3.81055C9.25195 3.39633 9.58774 3.06055 10.002 3.06055Z"
-              />
-            </svg>
+          <div ref="attachDropdownRef" class="attach-dropdown">
+            <div class="action-button" @click="showAttachDropdown = !showAttachDropdown" @mouseenter="handleHover" @mouseleave="handleLeave">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M10.002 3.06055C10.4161 3.06065 10.752 3.39639 10.752 3.81055V9.25H16.1914C16.6056 9.25 16.9414 9.58579 16.9414 10C16.9414 10.4142 16.6056 10.75 16.1914 10.75H10.752V16.1895C10.752 16.6036 10.4161 16.9394 10.002 16.9395C9.58774 16.9395 9.25195 16.6037 9.25195 16.1895V10.75H3.8125C3.39829 10.75 3.0625 10.4142 3.0625 10C3.0625 9.58579 3.39829 9.25 3.8125 9.25H9.25195V3.81055C9.25195 3.39633 9.58774 3.06055 10.002 3.06055Z"
+                />
+              </svg>
+            </div>
+            <div v-if="showAttachDropdown" class="attach-dropdown-menu">
+              <div class="attach-dropdown-item" @click="handleAttach('image')" @mouseenter="handleItemHover" @mouseleave="handleItemLeave">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2" />
+                  <circle cx="6" cy="6" r="1.5" fill="currentColor" />
+                  <path d="M2 10L5 7L8 10L11 7L14 10V12C14 12.5523 13.5523 13 13 13H3C2.44772 13 2 12.5523 2 12V10Z" fill="currentColor" />
+                </svg>
+                <span>图片</span>
+              </div>
+              <div class="attach-dropdown-item" @click="handleAttach('file')" @mouseenter="handleItemHover" @mouseleave="handleItemLeave">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 2H9.5L13 5.5V14C13 14.5523 12.5523 15 12 15H4C3.44772 15 3 14.5523 3 14V3C3 2.44772 3.44772 2 4 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M9 2V6H13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>本地文件</span>
+              </div>
+              <div class="attach-dropdown-item" @click="handleAttach('document')" @mouseenter="handleItemHover" @mouseleave="handleItemLeave">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8.0019 13.1391C10.8399 13.1391 13.1405 10.8384 13.1405 8.00044C13.1405 5.16245 10.8399 2.86182 8.0019 2.86182C5.16392 2.86182 2.86328 5.16245 2.86328 8.00044C2.86328 10.8384 5.16392 13.1391 8.0019 13.1391Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M2 8H14M8 2V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <span>联网文档</span>
+              </div>
+            </div>
           </div>
           <button
             class="send-button"
@@ -149,7 +175,7 @@
             @click="handleSend"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 8L14 2L10 8L14 14L2 8Z" fill="currentColor" />
+              <path d="M8 2L14 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
         </div>
@@ -178,6 +204,7 @@ const inputValue = ref(props.modelValue)
 // 下拉菜单状态
 const showSearchDropdown = ref(false)
 const showToolDropdown = ref(false)
+const showAttachDropdown = ref(false)
 const searchMode = ref('auto') // 'auto' | 'manual'
 const toolMode = ref('') // '写作' | '编程' | '解题'
 const isDeepThinkActive = ref(false) // 深度思考激活状态
@@ -189,6 +216,10 @@ const searchDropdownRef = useClickOutside(() => {
 
 const toolDropdownRef = useClickOutside(() => {
   showToolDropdown.value = false
+})
+
+const attachDropdownRef = useClickOutside(() => {
+  showAttachDropdown.value = false
 })
 
 // 选择搜索模式
@@ -233,6 +264,20 @@ const handleActiveHover = (e) => {
 
 const handleActiveLeave = (e) => {
   e.currentTarget.style.backgroundColor = '#e5e7eb'
+}
+
+const handleItemHover = (e) => {
+  e.currentTarget.style.backgroundColor = '#f3f4f6'
+}
+
+const handleItemLeave = (e) => {
+  e.currentTarget.style.backgroundColor = 'transparent'
+}
+
+const handleAttach = (type) => {
+  console.log('Attach type:', type)
+  showAttachDropdown.value = false
+  // TODO: 实现附件上传逻辑
 }
 </script>
 
@@ -350,10 +395,16 @@ const handleActiveLeave = (e) => {
   line-height: 1.5;
 }
 
+
 .input-actions {
   display: flex;
   gap: 8px;
   align-items: center;
+  position: relative;
+}
+
+.attach-dropdown {
+  position: relative;
 }
 
 .action-button {
@@ -365,6 +416,37 @@ const handleActiveLeave = (e) => {
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.2s;
+}
+
+.attach-dropdown-menu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.attach-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1f2937;
+  transition: background-color 0.2s;
+}
+
+.attach-dropdown-item svg {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
 }
 
 .send-button {
