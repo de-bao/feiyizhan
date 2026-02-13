@@ -1,64 +1,65 @@
 <template>
   <div class="input-area">
     <div class="input-container">
-      <div class="input-wrapper">
-        <!-- 左侧工具栏 -->
-        <div class="toolbar">
-          <div class="toolbar-item" @mouseenter="handleHover" @mouseleave="handleLeave">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M7.74121 3.17676C9.89642 1.88502 11.9715 1.59281 13.001 2.62207L13.1289 2.76465C14.002 3.83505 13.6794 5.82083 12.4443 7.88086C13.7358 10.0358 14.0282 12.1093 12.999 13.1387L12.8574 13.2676C11.7872 14.1405 9.8019 13.8175 7.74219 12.583C5.68184 13.8185 3.69561 14.1417 2.625 13.2686L2.4834 13.1396C1.45403 12.1102 1.74622 10.0361 3.03809 7.88086C1.80268 5.82062 1.48033 3.83423 2.35352 2.76367L2.48145 2.62207C3.51103 1.59274 5.58588 1.88478 7.74121 3.17676Z"
-                fill="currentColor"
-                fill-opacity="0.9"
-              />
-            </svg>
-            <span>深度思考</span>
-          </div>
-          <div
-            class="toolbar-item active"
-            @mouseenter="handleActiveHover"
-            @mouseleave="handleActiveLeave"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M8.0019 13.1391C10.8399 13.1391 13.1405 10.8384 13.1405 8.00044C13.1405 5.16245 10.8399 2.86182 8.0019 2.86182C5.16392 2.86182 2.86328 5.16245 2.86328 8.00044C2.86328 10.8384 5.16392 13.1391 8.0019 13.1391Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-            </svg>
-            <span>自动搜索</span>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path
-                d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <div class="toolbar-item" @mouseenter="handleHover" @mouseleave="handleLeave">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4.49609 8.79297C6.01297 8.79297 7.24299 10.0223 7.24316 11.5391C7.24303 13.0558 6.013 14.2861 4.49609 14.2861C2.97927 14.286 1.75013 13.0558 1.75 11.5391C1.75018 10.0224 2.9793 8.79307 4.49609 8.79297Z"
-                fill="currentColor"
-                fill-opacity="0.9"
-              />
-            </svg>
-            <span>工具</span>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path
-                d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
+      <!-- 工具栏（在搜索框上方） -->
+      <div class="toolbar">
+        <div class="toolbar-item" @mouseenter="handleHover" @mouseleave="handleLeave">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M7.74121 3.17676C9.89642 1.88502 11.9715 1.59281 13.001 2.62207L13.1289 2.76465C14.002 3.83505 13.6794 5.82083 12.4443 7.88086C13.7358 10.0358 14.0282 12.1093 12.999 13.1387L12.8574 13.2676C11.7872 14.1405 9.8019 13.8175 7.74219 12.583C5.68184 13.8185 3.69561 14.1417 2.625 13.2686L2.4834 13.1396C1.45403 12.1102 1.74622 10.0361 3.03809 7.88086C1.80268 5.82062 1.48033 3.83423 2.35352 2.76367L2.48145 2.62207C3.51103 1.59274 5.58588 1.88478 7.74121 3.17676Z"
+              fill="currentColor"
+              fill-opacity="0.9"
+            />
+          </svg>
+          <span>深度思考</span>
         </div>
+        <div
+          class="toolbar-item active"
+          @mouseenter="handleActiveHover"
+          @mouseleave="handleActiveLeave"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M8.0019 13.1391C10.8399 13.1391 13.1405 10.8384 13.1405 8.00044C13.1405 5.16245 10.8399 2.86182 8.0019 2.86182C5.16392 2.86182 2.86328 5.16245 2.86328 8.00044C2.86328 10.8384 5.16392 13.1391 8.0019 13.1391Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>自动搜索</span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path
+              d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="toolbar-item" @mouseenter="handleHover" @mouseleave="handleLeave">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M4.49609 8.79297C6.01297 8.79297 7.24299 10.0223 7.24316 11.5391C7.24303 13.0558 6.013 14.2861 4.49609 14.2861C2.97927 14.286 1.75013 13.0558 1.75 11.5391C1.75018 10.0224 2.9793 8.79307 4.49609 8.79297Z"
+              fill="currentColor"
+              fill-opacity="0.9"
+            />
+          </svg>
+          <span>工具</span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path
+              d="M3.5 5.00024L6.5 8.00024L9.5 5.00024"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
 
+      <!-- 输入框容器 -->
+      <div class="input-wrapper">
         <!-- 输入框 -->
         <textarea
           ref="textareaRef"
@@ -163,6 +164,14 @@ const handleActiveLeave = (e) => {
   gap: 8px;
 }
 
+.toolbar {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.9);
+  padding: 0 4px;
+}
+
 .input-wrapper {
   background: #f9fafb;
   border: 1px solid #e5e7eb;
@@ -171,13 +180,6 @@ const handleActiveLeave = (e) => {
   display: flex;
   align-items: flex-end;
   gap: 12px;
-}
-
-.toolbar {
-  display: flex;
-  gap: 8px;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.9);
 }
 
 .toolbar-item {
