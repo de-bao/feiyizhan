@@ -564,8 +564,19 @@ const handleItemLeave = (e) => {
   }
 
   .sidebar.collapsed {
-    width: 0;
-    overflow: hidden;
+    width: 60px;
+    overflow: visible;
+  }
+
+  .sidebar.collapsed .sidebar-header {
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .sidebar.collapsed .header-button {
+    width: 40px;
+    height: 40px;
   }
 
   .sidebar-header {
