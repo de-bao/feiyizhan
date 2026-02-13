@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import vue from '@vitejs/plugin-vue'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 import { execSync } from 'child_process'
@@ -10,7 +10,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    vue(),
     {
       name: 'copy-resource-files',
       closeBundle() {
