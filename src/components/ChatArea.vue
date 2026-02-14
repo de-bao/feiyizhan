@@ -16,6 +16,7 @@
         <div
           v-for="(message, index) in messages"
           :key="index"
+          :ref="el => { if (el) messageRefs[index] = el }"
           :class="['message-item', { 'user-message': message.role === 'user' }]"
         >
           <div :class="['avatar', { 'user-avatar': message.role === 'user' }]">
@@ -92,32 +93,43 @@ const props = defineProps({
 })
 
 const chatAreaRef = ref(null)
+const messageRefs = ref({})
 
-// 滚动到顶部
-const scrollToTop = () => {
-  if (chatAreaRef.value) {
-    chatAreaRef.value.scrollTop = 0
+// 滚动到最新消息（让最新消息显示在顶部）
+const scrollToLatest = () => {
+  if (chatAreaRef.value && props.messages.length > 0) {
+    // 获取最新消息的索引（最后一条）
+    const lastIndex = props.messages.length - 1
+    const lastMessageEl = messageRefs.value[lastIndex]
+    
+    if (lastMessageEl) {
+      // 将最新消息滚动到顶部
+      lastMessageEl.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      // 如果元素还没渲染，直接滚动到容器顶部（作为后备方案）
+      chatAreaRef.value.scrollTop = chatAreaRef.value.scrollHeight
+    }
   }
 }
 
 // 暴露方法给父组件
 defineExpose({
-  scrollToTop
+  scrollToLatest
 })
 
-// 监听消息变化，自动滚动到顶部
-watch(() => props.messages, () => {
+// 监听消息变化，自动滚动到最新消息
+watch(() => props.messages.length, () => {
   nextTick(() => {
-    scrollToTop()
+    scrollToLatest()
   })
-}, { deep: true })
+})
 
 // 监听加载状态变化，加载完成后也滚动
 watch(() => props.isLoading, (newVal) => {
   if (!newVal) {
-    // 加载完成后滚动
+    // 加载完成后滚动到最新消息
     nextTick(() => {
-      scrollToTop()
+      scrollToLatest()
     })
   }
 })

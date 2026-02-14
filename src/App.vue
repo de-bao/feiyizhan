@@ -401,10 +401,10 @@ const handleSend = async (text) => {
   // 清空输入框
   inputValue.value = ''
   
-  // 滚动到顶部（等待DOM更新）
+  // 滚动到最新消息（等待DOM更新）
   nextTick(() => {
     if (chatAreaRef.value) {
-      chatAreaRef.value.scrollToTop()
+      chatAreaRef.value.scrollToLatest()
     }
   })
   
