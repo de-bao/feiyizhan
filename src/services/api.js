@@ -2,15 +2,27 @@
  * API服务 - 与后端FastAPI通信
  */
 
-// API基础URL - 可以通过环境变量配置
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://chatback--debaocpc.replit.app'
+// API基础URL - 必须从环境变量配置
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+if (!API_BASE_URL) {
+  throw new Error('VITE_API_BASE_URL 环境变量未配置，请在 .env 文件中设置')
+}
 
 // 模型映射：前端模型名 -> 后端模型名
-// 从环境变量读取，如果没有则使用默认值
+// 必须从环境变量读取
 const MODEL_MAP = {
-  'Qwen': import.meta.env.VITE_MODEL_QWEN || 'qwen-plus', // 阿里云百炼 Qwen模型
-  'Kimi': import.meta.env.VITE_MODEL_KIMI || 'qwen-max', // 阿里云百炼 高级Qwen模型
-  'DeepSeek': import.meta.env.VITE_MODEL_DEEPSEEK || 'deepseek-v3.2' // 阿里云百炼 DeepSeek模型
+  'Qwen': import.meta.env.VITE_MODEL_QWEN,
+  'Kimi': import.meta.env.VITE_MODEL_KIMI,
+  'DeepSeek': import.meta.env.VITE_MODEL_DEEPSEEK
+}
+
+// 验证模型配置
+const missingModels = Object.entries(MODEL_MAP)
+  .filter(([key, value]) => !value)
+  .map(([key]) => key)
+
+if (missingModels.length > 0) {
+  throw new Error(`以下模型环境变量未配置: ${missingModels.join(', ')}。请在 .env 文件中设置 VITE_MODEL_${missingModels.join(', VITE_MODEL_')}`)
 }
 
 /**
@@ -22,8 +34,10 @@ const MODEL_MAP = {
 export async function sendChatMessage(messages, model = 'Qwen') {
   try {
     // 将前端模型名映射到后端模型名
-    // 如果不想指定模型，可以不传model参数，让后端使用默认模型
-    const backendModel = MODEL_MAP[model] || MODEL_MAP['Qwen']
+    const backendModel = MODEL_MAP[model]
+    if (!backendModel) {
+      throw new Error(`模型 "${model}" 未配置，请在 .env 文件中设置 VITE_MODEL_${model.toUpperCase()}`)
+    }
     
     // 构建请求体
     const requestBody = {

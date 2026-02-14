@@ -76,28 +76,31 @@ npm run build
 
 ## 🔨 后端API接入
 
-### 配置API地址和模型
+### 配置API地址和模型（必填）
 
-1. 在项目根目录创建 `.env` 文件（可选，不创建则使用默认值）：
+**重要：所有配置必须通过环境变量设置，代码中不包含任何硬编码的默认值。**
+
+1. 在项目根目录创建 `.env` 文件（参考 `.env.example`）：
 ```bash
-# API配置（默认：https://chatback--debaocpc.replit.app）
+# API配置（必填）
 VITE_API_BASE_URL=https://chatback--debaocpc.replit.app
 
-# 模型配置（对应阿里云百炼API的模型名）
+# 模型配置（必填，对应阿里云百炼API的模型名）
 VITE_MODEL_QWEN=qwen-plus
 VITE_MODEL_KIMI=qwen-max
 VITE_MODEL_DEEPSEEK=deepseek-v3.2
 ```
 
 2. 配置说明：
-   - `VITE_API_BASE_URL`: 后端API地址（默认：https://chatback--debaocpc.replit.app）
-   - `VITE_MODEL_QWEN`: Qwen模型名称（默认：qwen-plus）
-   - `VITE_MODEL_KIMI`: Kimi模型名称（默认：qwen-max）
-   - `VITE_MODEL_DEEPSEEK`: DeepSeek模型名称（默认：deepseek-v3.2）
+   - `VITE_API_BASE_URL`: 后端API地址（**必填**）
+   - `VITE_MODEL_QWEN`: Qwen模型名称（**必填**）
+   - `VITE_MODEL_KIMI`: Kimi模型名称（**必填**）
+   - `VITE_MODEL_DEEPSEEK`: DeepSeek模型名称（**必填**）
 
-3. **重要**：`.env` 文件包含敏感配置，已添加到 `.gitignore`，不会被提交到仓库
-
-4. 如果不配置，将使用默认值（适合阿里云百炼API）
+3. **重要**：
+   - `.env` 文件不会被提交到仓库（已在 `.gitignore` 中）
+   - 如果缺少任何环境变量，应用启动时会抛出错误
+   - 可以复制 `.env.example` 文件并重命名为 `.env`，然后修改配置值
 
 ### 启动后端服务
 
