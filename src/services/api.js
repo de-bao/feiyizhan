@@ -3,7 +3,7 @@
  */
 
 // API基础URL - 可以通过环境变量配置
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://chatback--debaocpc.replit.app'
 
 // 模型映射：前端模型名 -> 后端模型名
 // 从环境变量读取，如果没有则使用默认值

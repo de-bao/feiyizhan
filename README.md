@@ -78,10 +78,10 @@ npm run build
 
 ### 配置API地址和模型
 
-1. 在项目根目录创建 `.env` 文件：
+1. 在项目根目录创建 `.env` 文件（可选，不创建则使用默认值）：
 ```bash
-# API配置
-VITE_API_BASE_URL=http://localhost:8000
+# API配置（默认：https://chatback--debaocpc.replit.app）
+VITE_API_BASE_URL=https://chatback--debaocpc.replit.app
 
 # 模型配置（对应阿里云百炼API的模型名）
 VITE_MODEL_QWEN=qwen-plus
@@ -90,7 +90,7 @@ VITE_MODEL_DEEPSEEK=deepseek-v3.2
 ```
 
 2. 配置说明：
-   - `VITE_API_BASE_URL`: 后端API地址（默认：http://localhost:8000）
+   - `VITE_API_BASE_URL`: 后端API地址（默认：https://chatback--debaocpc.replit.app）
    - `VITE_MODEL_QWEN`: Qwen模型名称（默认：qwen-plus）
    - `VITE_MODEL_KIMI`: Kimi模型名称（默认：qwen-max）
    - `VITE_MODEL_DEEPSEEK`: DeepSeek模型名称（默认：deepseek-v3.2）
