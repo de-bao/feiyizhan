@@ -87,7 +87,7 @@ VITE_API_BASE_URL=https://chatback--debaocpc.replit.app
 
 # 模型配置（必填，对应阿里云百炼API的模型名）
 VITE_MODEL_QWEN=qwen-plus
-VITE_MODEL_KIMI=qwen-max
+VITE_MODEL_KIMI=kimi
 VITE_MODEL_DEEPSEEK=deepseek-v3.2
 ```
 
